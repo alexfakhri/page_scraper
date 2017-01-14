@@ -1,4 +1,6 @@
 require 'sinatra/base'
+require 'nokogiri'
+require 'open-uri'
 
 class PageScraper < Sinatra::Base
 
@@ -15,6 +17,11 @@ class PageScraper < Sinatra::Base
 
   get '/result' do
     @url = session[:url]
+    @html = Nokogiri::HTML(open(@url))
+    @links = @html.css('a')
+    @sorted_links =  @links.map{|link| link.attribute('href').to_s}.delete_if {|href| href.empty?}
+    @twitter = @sorted_links.select{|s| s =~ /twitter.com/}
+    @github = @sorted_links.select{|s| s =~ /github.com/}
     erb :result
   end
 
