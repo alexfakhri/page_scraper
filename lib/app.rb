@@ -1,9 +1,16 @@
 require 'sinatra/base'
-require './lib/url_parser'
+require 'rack-flash'
+require_relative 'url_parser'
 
 class PageScraper < Sinatra::Base
 
+  set :views, Proc.new { File.join(root, "..", "views") }
+
   enable :sessions
+
+  use Rack::Flash
+
+  set :show_exceptions, :after_handler
 
   url_parser = UrlParser.new(@url)
 
@@ -12,8 +19,8 @@ class PageScraper < Sinatra::Base
   end
 
   post '/url' do
-    session[:url] = params[:url]
-    redirect :result
+      session[:url] = params[:url]
+      redirect :result
   end
 
   get '/result' do
@@ -23,6 +30,11 @@ class PageScraper < Sinatra::Base
     @twitter = url_parser.twitter(@links)
     @github = url_parser.github(@links)
     erb :result
+  end
+
+  error 400..510 do
+      flash[:error] = "The website you requested returned with an error, please try another site."
+  		redirect back
   end
 
   # start the server if ruby file executed directly

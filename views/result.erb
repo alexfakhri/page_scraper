@@ -1,17 +1,17 @@
 <body>
 
   <p>The URL you requested is: <%= @url %></p>
-  </br>
-  </br>
-  <%= @links %>
-  </br>
-  </br>
-  <%= @sorted_links %>
-  </br>
-  </br>
-  <%= @twitter %>
-  </br>
-  </br>
-  <%= @github %>
+
+  <% if @twitter == nil %>
+    <P>No Twitter profile found</p>
+  <% else %>
+    <p>One link to a Twitter profile found:<a href="<%= @twitter %>">Twitter Profile</a>
+  <% end %>
+
+  <% if @github == nil %>
+    <P>No Github profile found</p>
+  <% else %>
+    <p>One link to a Github profile found:<a href="<%= @github %>">Github Profile</a>
+  <% end %>
 
 </body>

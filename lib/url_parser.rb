@@ -18,11 +18,11 @@ class UrlParser
   end
 
   def twitter(links)
-    links.select{|s| s =~ /twitter.com/}
+    links.select{|s| s =~ /twitter.com/}.first
   end
 
   def github(links)
-    links.select{|s| s =~ /github.com/}
+    links.select{|s| s =~ /github.com/}.first
   end
 
 end
