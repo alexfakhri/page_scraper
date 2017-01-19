@@ -1,7 +1,7 @@
 Page Scraper
 =======
 
-A simple app that looks for Twitter and Github profile links on a given URL and prints them on a page for you to save you time having to search for them =.
+A simple app that looks for Twitter and Github profile links on a given website and prints them on a page for you to save time having to search for them.
 
 Technologies Used:
 -----------
