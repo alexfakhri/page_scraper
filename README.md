@@ -25,7 +25,7 @@ Change into the directory:
 $ cd page_scraper
 ```
 
-Change into the directory:
+Install dependencies:
 ```shell
 $ bundle install
 ```
